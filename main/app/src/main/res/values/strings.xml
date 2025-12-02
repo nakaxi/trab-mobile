@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Menu CRUD</string>
+    <string name="func">CRUD Funcionario</string>
+    <string name="produto">CRUD Produto</string>
+    <string name="comanda">CRUD Comanda</string>
+    <string name="act1">CRUD Funcionario</string>
+    <string name="act2">CRUD Produto</string>
+    <string name="act3">CRUD Comandaç</string>
+</resources>
