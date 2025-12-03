@@ -3,11 +3,13 @@ package com.example.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -15,6 +17,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.main.model.Funcionario;
+import com.example.main.model.controller.FuncControl;
+import com.example.main.persistence.FuncDao;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Objects;
 
 public class CFuncActivity extends AppCompatActivity {
 
@@ -30,6 +40,8 @@ public class CFuncActivity extends AppCompatActivity {
     private Button excluir;
     private Button mod;
     private Button listar;
+    private FuncControl fc;
+    private int t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +59,6 @@ public class CFuncActivity extends AppCompatActivity {
         sala = findViewById(R.id.etsala);
         tele = findViewById(R.id.ettele);
         cargon = findViewById(R.id.etcargon);
-        cargo = findViewById(R.id.tvcargol);
         lista = findViewById(R.id.tvlista);
         buscar = findViewById(R.id.btnbuscar);
         inserir = findViewById(R.id.btninserir);
@@ -55,7 +66,136 @@ public class CFuncActivity extends AppCompatActivity {
         mod = findViewById(R.id.btnmod);
         listar = findViewById(R.id.btnlistar);
         listar.setMovementMethod(new ScrollingMovementMethod());
+
+        try {
+            fc = new FuncControl(new FuncDao(this));
+        } catch (SQLException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e("SQLException", Objects.requireNonNull(e.getMessage()));
+        }
+
+        inserir.setOnClickListener(click -> acaoinserir());
+        excluir.setOnClickListener(click -> acaoexcluir());
+        mod.setOnClickListener(click -> acaomod());
+        listar.setOnClickListener(click -> acaolistar());
+        buscar.setOnClickListener(click -> acaobuscarr());
     }
+
+    private Funcionario montafun() {
+        Funcionario f = new Funcionario();
+        f.setid(Integer.parseInt(id.getText().toString()));
+        f.setNome(nome.getText().toString());
+        f.setSalario(Double.parseDouble(id.getText().toString()));
+        f.setTelefone(tele.getText().toString());
+        t =(Integer.parseInt(cargon.getText().toString()));
+        if (t == 1) {
+            f.setCargo("Gerente");
+        } else if (t == 2) {
+            f.setCargo("Caixa");
+        } else if (t == 3) {
+            f.setCargo("Atendente");
+        } else {
+            Toast.makeText(this, "Cargo inválido! Use 1, 2 ou 3.", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        return f;
+    }
+
+    private void preenchecampos(Funcionario funcionario) {
+        id.setText(String.valueOf(funcionario.getid()));
+        nome.setText(funcionario.getNome());
+        sala.setText(String.valueOf(funcionario.getSalario()));
+        tele.setText(funcionario.getTelefone());
+
+        String cargo = funcionario.getCargo();
+
+        if (cargo.equalsIgnoreCase("Gerente")) {
+            cargon.setText("1");
+        } else if (cargo.equalsIgnoreCase("Caixa")) {
+            cargon.setText("2");
+        } else if (cargo.equalsIgnoreCase("Atendente")) {
+            cargon.setText("3");
+        } else {
+            cargon.setText(""); // cargo inválido
+        }
+    }
+
+    private void limpacampos() {
+        id.setText("");
+        nome.setText("");
+        sala.setText("");
+        tele.setText("");
+        cargon.setText("");
+    }
+
+    private void acaoinserir() {
+        Funcionario funcionario = montafun();
+        try {
+            fc.inserir(funcionario);
+            Toast.makeText(this, getString(R.string.funinsert), Toast.LENGTH_LONG).show();
+        } catch (SQLException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e("SQLException", Objects.requireNonNull(e.getMessage()));
+        }
+        limpacampos();
+    }
+
+    private void acaoexcluir() {
+        Funcionario funcionario = montafun();
+        try {
+            fc.excluir(funcionario);
+            Toast.makeText(this, getString(R.string.fundelete), Toast.LENGTH_LONG).show();
+        } catch (SQLException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e("SQLException", Objects.requireNonNull(e.getMessage()));
+        }
+        limpacampos();
+    }
+
+    private void acaomod() {
+        Funcionario funcionario = montafun();
+        try {
+            fc.modificar(funcionario);
+            Toast.makeText(this, getString(R.string.funmod), Toast.LENGTH_LONG).show();
+        } catch (SQLException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e("SQLException", Objects.requireNonNull(e.getMessage()));
+        }
+        limpacampos();
+    }
+
+    private void acaolistar() {
+        try {
+            List<Funcionario> funs = fc.listar();
+            StringBuffer buffer = new StringBuffer();
+            for(Funcionario f : funs){
+                buffer.append(f.toString());
+                buffer.append("\n");
+            }
+            lista.setText(buffer.toString());
+        } catch (SQLException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e("SQLException", Objects.requireNonNull(e.getMessage()));
+        }
+    }
+
+    private void acaobuscarr() {
+        Funcionario funcionario = montafun();
+        try {
+            funcionario = fc.buscar(funcionario);
+            if (funcionario.getNome() != null) {
+                preenchecampos(funcionario);
+            } else {
+                Toast.makeText(this, getString(R.string.funbusca), Toast.LENGTH_LONG).show();
+                limpacampos();
+            }
+        } catch (SQLException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e("SQLException", Objects.requireNonNull(e.getMessage()));
+        }
+    }
+
 
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_principal, menu);

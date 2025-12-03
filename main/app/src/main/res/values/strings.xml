@@ -18,5 +18,19 @@
     <string name="tele">Telefone</string>
     <string name="sala">Salario</string>
     <string name="cargo">Cargo</string>
+    <string name="Lcargo"> 1 - Gerente\n2 - Caixa\n3 - Atendente</string>
     <string name="valor">Valor</string>
+
+    <string name="funinsert">Funcionario inserido com sucesso</string>
+    <string name="funmod">Funcionario modificado com sucesso</string>
+    <string name="fundelete">Funcionario deletado com sucesso</string>
+    <string name="funbusca">Funcionario inexistente</string>
+
+    <string name="prodinsert">Produto inserido com sucesso</string>
+    <string name="prodmod">Produto modificado com sucesso</string>
+    <string name="proddelete">Produto deletado com sucesso</string>
+
+    <string name="cominsert">Comanda inserida com sucesso</string>
+    <string name="commod">Comanda modificada com sucesso</string>
+    <string name="comdelete">Comanda deletada com sucesso</string>
 </resources>
