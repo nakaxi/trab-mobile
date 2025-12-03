@@ -199,7 +199,6 @@ public class CFuncActivity extends AppCompatActivity {
     private void acaobuscarr() {
         Funcionario funcionario = new Funcionario();
         funcionario.setid(Integer.parseInt(id.getText().toString()));
-
         try {
             funcionario = fc.buscar(funcionario);
             if (funcionario.getNome() != null) {

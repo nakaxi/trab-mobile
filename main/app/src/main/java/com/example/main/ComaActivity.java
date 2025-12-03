@@ -19,9 +19,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.main.model.Comanda;
-import com.example.main.model.Funcionario;
 import com.example.main.model.controller.ComandaController;
-import com.example.main.model.controller.FuncControl;
+import com.example.main.persistence.ComdDao;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -50,7 +49,7 @@ public class ComaActivity extends AppCompatActivity {
             return insets;
         });
 
-        id = findViewById(R.id.etid);
+        id = findViewById(R.id.etid3);
         buscar = findViewById(R.id.btnbuscar3);
         inserir = findViewById(R.id.btninserir3);
         excluir = findViewById(R.id.btnex3);
@@ -58,6 +57,8 @@ public class ComaActivity extends AppCompatActivity {
         listar = findViewById(R.id.btnlistar3);
         lista = findViewById(R.id.tvlista3);
         listar.setMovementMethod(new ScrollingMovementMethod());
+
+        cc = new ComandaController(new ComdDao(this));
 
         inserir.setOnClickListener(click -> acaoinserir());
         excluir.setOnClickListener(click -> acaoexcluir());
@@ -83,7 +84,6 @@ public class ComaActivity extends AppCompatActivity {
 
     private void limpacampos() {
         id.setText("");
-
     }
 
     private void acaoinserir() {
@@ -150,6 +150,12 @@ public class ComaActivity extends AppCompatActivity {
     private void acaobuscarr() {
         Comanda comanda = new Comanda();
         comanda.setId(Integer.parseInt(id.getText().toString()));
+        try {
+            comanda = cc.buscar(comanda);
+        } catch (SQLException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e("SQLException", Objects.requireNonNull(e.getMessage()));
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu){

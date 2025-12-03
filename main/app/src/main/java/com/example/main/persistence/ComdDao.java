@@ -5,11 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+
+
 import com.example.main.model.Comanda;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ComdDao implements IComdDao, ICRUDDao<Comanda> {
@@ -23,7 +24,7 @@ public class ComdDao implements IComdDao, ICRUDDao<Comanda> {
     }
 
     @Override
-    public ComdDao open() throws SQLException{
+    public ComdDao open() throws SQLException {
         gDao = new GenericDao(context);
         db = gDao.getWritableDatabase();
         return this;
@@ -55,11 +56,10 @@ public class ComdDao implements IComdDao, ICRUDDao<Comanda> {
     public Comanda findOne(Comanda comanda) throws SQLException {
         String sql = "SELECT id FROM comanda WHERE id = " + comanda.getId();
         Cursor cursor = db.rawQuery(sql, null);
-
-        if (cursor != null && cursor.moveToFirst()) {
+        cursor.moveToFirst();
+        if (!cursor.isAfterLast()) {
             comanda.setId(cursor.getInt(cursor.getColumnIndex("id")));
         }
-
         cursor.close();
         return comanda;
     }
@@ -68,17 +68,14 @@ public class ComdDao implements IComdDao, ICRUDDao<Comanda> {
     public List<Comanda> listar() throws SQLException {
         List<Comanda> comandas = new ArrayList<>();
         String sql = "SELECT id FROM comanda";
-
         Cursor cursor = db.rawQuery(sql, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Comanda c = new Comanda();
-                c.setId(cursor.getInt(cursor.getColumnIndex("id")));
-                comandas.add(c);
-            } while (cursor.moveToNext());
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Comanda c = new Comanda();
+            c.setId(cursor.getInt(cursor.getColumnIndex("id")));
+            cursor.moveToNext();
+            comandas.add(c);
         }
-
         cursor.close();
         return comandas;
     }
