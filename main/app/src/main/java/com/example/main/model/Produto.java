@@ -4,7 +4,7 @@ public class Produto {
 
     private int idp;
 
-    private String nome;
+    private String nomep;
 
     private double valor;
 
@@ -20,12 +20,12 @@ public class Produto {
         this.idp = idp;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomep() {
+        return nomep;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomep(String nomep) {
+        this.nomep = nomep;
     }
 
     public double getValor() {

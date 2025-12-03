@@ -15,14 +15,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class CFuncActivity extends AppCompatActivity {
+public class ProdActivity extends AppCompatActivity {
 
     private EditText id;
     private EditText nome;
-    private EditText sala;
-    private EditText tele;
-    private EditText cargon;
-    private TextView cargo;
+    private EditText valor;
     private TextView lista;
     private Button buscar;
     private Button inserir;
@@ -34,25 +31,21 @@ public class CFuncActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_cfunc);
+        setContentView(R.layout.activity_prod);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        id = findViewById(R.id.etid);
-        nome = findViewById(R.id.etnome);
-        sala = findViewById(R.id.etsala);
-        tele = findViewById(R.id.ettele);
-        cargon = findViewById(R.id.etcargon);
-        cargo = findViewById(R.id.tvcargol);
-        lista = findViewById(R.id.tvlista);
-        buscar = findViewById(R.id.btnbuscar);
-        inserir = findViewById(R.id.btninserir);
-        excluir = findViewById(R.id.btnex);
-        mod = findViewById(R.id.btnmod);
-        listar = findViewById(R.id.btnlistar);
+        id = findViewById(R.id.etid2);
+        nome = findViewById(R.id.etnome2);
+        valor = findViewById(R.id.etvalor2);
+        lista = findViewById(R.id.tvlista2);
+        buscar = findViewById(R.id.btnbuscar2);
+        inserir = findViewById(R.id.btninserir2);
+        excluir = findViewById(R.id.btnex2);
+        mod = findViewById(R.id.btnmod2);
+        listar = findViewById(R.id.btnlistar2);
     }
 
     public boolean onCreateOptionsMenu(Menu menu){

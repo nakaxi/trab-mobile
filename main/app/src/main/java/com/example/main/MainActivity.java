@@ -35,9 +35,20 @@ public class MainActivity extends AppCompatActivity {
         btnfunc = findViewById(R.id.btnfunc);
         btnprod = findViewById(R.id.btnprod);
         btncom = findViewById(R.id.btncom);
-    }
 
-    private void troca1(){
-        Intent i = new Intent(this, CFuncActivity.class);
+        btnfunc.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, CFuncActivity.class);
+            startActivity(i);
+        });
+
+        btnprod.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, ProdActivity.class);
+            startActivity(i);
+        });
+
+        btncom.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, ComaActivity.class);
+            startActivity(i);
+        });
     }
 }

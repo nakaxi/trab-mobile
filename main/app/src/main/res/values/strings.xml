@@ -5,5 +5,18 @@
     <string name="comanda">CRUD Comanda</string>
     <string name="act1">CRUD Funcionario</string>
     <string name="act2">CRUD Produto</string>
-    <string name="act3">CRUD Comandaç</string>
+    <string name="act3">CRUD Comanda</string>
+
+    <string name="buscar">Buscar</string>
+    <string name="inserir">Inserir</string>
+    <string name="excluir">Excluir</string>
+    <string name="modificar">Modificar</string>
+    <string name="listar">Listar</string>
+
+    <string name="id">ID</string>
+    <string name="nome">Nome</string>
+    <string name="tele">Telefone</string>
+    <string name="sala">Salario</string>
+    <string name="cargo">Cargo</string>
+    <string name="valor">Valor</string>
 </resources>

@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Main">
         <activity
+            android:name=".ComaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProdActivity"
+            android:exported="false" />
+        <activity
             android:name=".CFuncActivity"
             android:exported="false" />
         <activity

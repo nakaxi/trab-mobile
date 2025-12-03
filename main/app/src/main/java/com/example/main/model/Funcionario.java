@@ -2,9 +2,11 @@ package com.example.main.model;
 
 public class Funcionario {
 
+    private int idf;
+
     private String nome;
 
-    private int salario;
+    private double salario;
 
     private String telefone;
 
@@ -12,6 +14,14 @@ public class Funcionario {
 
     public Funcionario(){
         super();
+    }
+
+    public int getidf() {
+        return idf;
+    }
+
+    public void setidf(int idf) {
+        this.idf = idf;
     }
 
     public String getNome() {
@@ -22,11 +32,11 @@ public class Funcionario {
         this.nome = nome;
     }
 
-    public int getSalario() {
+    public double getSalario() {
         return salario;
     }
 
-    public void setSalario(int salario) {
+    public void setSalario(double salario) {
         this.salario = salario;
     }
 

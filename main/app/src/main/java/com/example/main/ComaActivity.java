@@ -15,26 +15,22 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class CFuncActivity extends AppCompatActivity {
+public class ComaActivity extends AppCompatActivity {
 
     private EditText id;
-    private EditText nome;
-    private EditText sala;
-    private EditText tele;
-    private EditText cargon;
-    private TextView cargo;
-    private TextView lista;
     private Button buscar;
     private Button inserir;
     private Button excluir;
     private Button mod;
     private Button listar;
+    private TextView lista;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_cfunc);
+        setContentView(R.layout.activity_coma);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -42,17 +38,12 @@ public class CFuncActivity extends AppCompatActivity {
         });
 
         id = findViewById(R.id.etid);
-        nome = findViewById(R.id.etnome);
-        sala = findViewById(R.id.etsala);
-        tele = findViewById(R.id.ettele);
-        cargon = findViewById(R.id.etcargon);
-        cargo = findViewById(R.id.tvcargol);
-        lista = findViewById(R.id.tvlista);
-        buscar = findViewById(R.id.btnbuscar);
-        inserir = findViewById(R.id.btninserir);
-        excluir = findViewById(R.id.btnex);
-        mod = findViewById(R.id.btnmod);
-        listar = findViewById(R.id.btnlistar);
+        buscar = findViewById(R.id.btnbuscar3);
+        inserir = findViewById(R.id.btninserir3);
+        excluir = findViewById(R.id.btnex3);
+        mod = findViewById(R.id.btnmod3);
+        listar = findViewById(R.id.btnlistar3);
+        lista = findViewById(R.id.tvlista3);
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
