@@ -33,7 +33,6 @@ public class CFuncActivity extends AppCompatActivity {
     private EditText sala;
     private EditText tele;
     private EditText cargon;
-    private TextView cargo;
     private TextView lista;
     private Button buscar;
     private Button inserir;
@@ -93,7 +92,6 @@ public class CFuncActivity extends AppCompatActivity {
         }
 
         Funcionario f = new Funcionario();
-
         f.setid(Integer.parseInt(id.getText().toString()));
         f.setNome(nome.getText().toString());
         f.setSalario(Double.parseDouble(sala.getText().toString()));

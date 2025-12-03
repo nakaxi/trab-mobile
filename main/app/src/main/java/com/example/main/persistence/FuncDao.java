@@ -5,11 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import androidx.annotation.NonNull;
+
 import com.example.main.model.Funcionario;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class FuncDao implements IFuncDao, ICRUDDao<Funcionario> {
@@ -52,7 +53,7 @@ public class FuncDao implements IFuncDao, ICRUDDao<Funcionario> {
     }
 
     @Override
-    public Funcionario findOne(Funcionario funcionario) throws SQLException {
+    public Funcionario findOne(@NonNull Funcionario funcionario) throws SQLException {
         String sql = "SELECT id, nome, salario, telefone, cargo FROM funcionario WHERE id = " + funcionario.getid();
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();

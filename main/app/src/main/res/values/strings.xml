@@ -29,8 +29,10 @@
     <string name="prodinsert">Produto inserido com sucesso</string>
     <string name="prodmod">Produto modificado com sucesso</string>
     <string name="proddelete">Produto deletado com sucesso</string>
+    <string name="prodbusca">Produto inexistente</string>
 
     <string name="cominsert">Comanda inserida com sucesso</string>
     <string name="commod">Comanda modificada com sucesso</string>
     <string name="comdelete">Comanda deletada com sucesso</string>
+    <string name="combusca">Comanda inexistente</string>
 </resources>
