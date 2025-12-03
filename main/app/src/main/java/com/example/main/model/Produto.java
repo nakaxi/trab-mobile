@@ -1,31 +1,40 @@
 package com.example.main.model;
 
+import androidx.annotation.NonNull;
+
 public class Produto {
 
-    private int idp;
+    private int id;
 
-    private String nomep;
+    private String nome;
 
     private double valor;
 
     public Produto(){
-        super();
+        nome = "";
+        valor = 0;
     }
 
-    public int getIdp() {
-        return idp;
+    public Produto(int id, double valor, String nome) {
+        this.id = id;
+        this.valor = valor;
+        this.nome = nome;
     }
 
-    public void setIdp(int idp) {
-        this.idp = idp;
+    public int getId() {
+        return id;
     }
 
-    public String getNomep() {
-        return nomep;
+    public void setId(int idp) {
+        this.id = id;
     }
 
-    public void setNomep(String nomep) {
-        this.nomep = nomep;
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public double getValor() {
@@ -34,5 +43,14 @@ public class Produto {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                '}';
     }
 }

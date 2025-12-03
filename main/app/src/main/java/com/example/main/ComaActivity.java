@@ -2,6 +2,7 @@ package com.example.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -44,6 +45,7 @@ public class ComaActivity extends AppCompatActivity {
         mod = findViewById(R.id.btnmod3);
         listar = findViewById(R.id.btnlistar3);
         lista = findViewById(R.id.tvlista3);
+        listar.setMovementMethod(new ScrollingMovementMethod());
     }
 
     public boolean onCreateOptionsMenu(Menu menu){

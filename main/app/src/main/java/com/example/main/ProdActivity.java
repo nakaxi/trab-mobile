@@ -2,6 +2,7 @@ package com.example.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -46,6 +47,7 @@ public class ProdActivity extends AppCompatActivity {
         excluir = findViewById(R.id.btnex2);
         mod = findViewById(R.id.btnmod2);
         listar = findViewById(R.id.btnlistar2);
+        listar.setMovementMethod(new ScrollingMovementMethod());
     }
 
     public boolean onCreateOptionsMenu(Menu menu){

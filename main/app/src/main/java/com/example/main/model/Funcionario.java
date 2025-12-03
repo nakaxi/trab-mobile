@@ -1,8 +1,10 @@
 package com.example.main.model;
 
+import androidx.annotation.NonNull;
+
 public class Funcionario {
 
-    private int idf;
+    private int id;
 
     private String nome;
 
@@ -10,18 +12,29 @@ public class Funcionario {
 
     private String telefone;
 
-    private int cargo;
+    private String cargo;
 
-    public Funcionario(){
-        super();
+    public Funcionario() {
+        nome = "";
+        salario = 0.0;
+        telefone = "";
+        cargo = "";
     }
 
-    public int getidf() {
-        return idf;
+    public Funcionario(String cargo, String telefone, double salario, String nome, int id) {
+        this.cargo = cargo;
+        this.telefone = telefone;
+        this.salario = salario;
+        this.nome = nome;
+        this.id = id;
     }
 
-    public void setidf(int idf) {
-        this.idf = idf;
+    public int getid() {
+        return id;
+    }
+
+    public void setid(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -48,11 +61,20 @@ public class Funcionario {
         this.telefone = telefone;
     }
 
-    public int getCargo() {
+    public String getCargo() {
         return cargo;
     }
 
-    public void setCargo(int cargo) {
+    public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "nome='" + nome + '\'' +
+                ", id=" + id +
+                '}';
     }
 }
