@@ -56,4 +56,12 @@ public class FuncControl implements IController<Funcionario> {
         }
         return fDao.listar();
     }
+
+    public boolean existeId(int id) throws SQLException {
+        if (fDao.open() == null) fDao.open();
+        boolean existe = fDao.existeId(id);
+        fDao.close();
+        return existe;
+    }
+
 }

@@ -14,15 +14,15 @@ public class GenericDao extends SQLiteOpenHelper {
                     "nome VARCHAR(100) NOT NULL, "+
                     "salario DOUBLE NOT NULL, "+
                     "telefone VARCHAR(11) NOT NULL, "+
-                    "cargo VARCHAR(9) NOT NULL;";
+                    "cargo VARCHAR(9) NOT NULL);";
     private static final String CREATE_TABLE_PROD =
             "CREATE TABLE produto ( "+
                     "id INT NOT NULL PRIMARY KEY, "+
                     "valor DOUBLE NOT NULL, "+
-                    "nome VARCHAR(100) NOT NULL;";
+                    "nome VARCHAR(100) NOT NULL);";
     private static final String CREATE_TABLE_COMD =
             "CREATE TABLE comanda ( "+
-                    "id INT NOT NULL PRIMARY KEY;";
+                    "id INT NOT NULL PRIMARY KEY);";
 
 
     public GenericDao(Context context) {

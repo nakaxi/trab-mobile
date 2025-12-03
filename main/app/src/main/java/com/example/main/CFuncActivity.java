@@ -82,23 +82,31 @@ public class CFuncActivity extends AppCompatActivity {
     }
 
     private Funcionario montafun() {
-        Funcionario f = new Funcionario();
-        f.setid(Integer.parseInt(id.getText().toString()));
-        f.setNome(nome.getText().toString());
-        f.setSalario(Double.parseDouble(id.getText().toString()));
-        f.setTelefone(tele.getText().toString());
-        t =(Integer.parseInt(cargon.getText().toString()));
-        if (t == 1) {
-            f.setCargo("Gerente");
-        } else if (t == 2) {
-            f.setCargo("Caixa");
-        } else if (t == 3) {
-            f.setCargo("Atendente");
-        } else {
-            Toast.makeText(this, "Cargo inválido! Use 1, 2 ou 3.", Toast.LENGTH_SHORT).show();
+        if (id.getText().toString().isEmpty() ||
+                nome.getText().toString().isEmpty() ||
+                sala.getText().toString().isEmpty() ||
+                tele.getText().toString().isEmpty() ||
+                cargon.getText().toString().isEmpty()) {
+
+            Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_LONG).show();
             return null;
         }
 
+        Funcionario f = new Funcionario();
+
+        f.setid(Integer.parseInt(id.getText().toString()));
+        f.setNome(nome.getText().toString());
+        f.setSalario(Double.parseDouble(sala.getText().toString()));
+        f.setTelefone(tele.getText().toString());
+        t =(Integer.parseInt(cargon.getText().toString()));
+        switch (t) {
+            case 1: f.setCargo("Gerente"); break;
+            case 2: f.setCargo("Caixa"); break;
+            case 3: f.setCargo("Atendente"); break;
+            default:
+                Toast.makeText(this, "Cargo inválido! Use 1, 2 ou 3.", Toast.LENGTH_SHORT).show();
+                return null;
+        }
         return f;
     }
 
@@ -131,7 +139,13 @@ public class CFuncActivity extends AppCompatActivity {
 
     private void acaoinserir() {
         Funcionario funcionario = montafun();
+        if (funcionario == null) return;
         try {
+            if (fc.existeId(funcionario.getid())) {
+                Toast.makeText(this, "ID já existe!", Toast.LENGTH_LONG).show();
+                return;
+            }
+
             fc.inserir(funcionario);
             Toast.makeText(this, getString(R.string.funinsert), Toast.LENGTH_LONG).show();
         } catch (SQLException e) {
@@ -143,6 +157,10 @@ public class CFuncActivity extends AppCompatActivity {
 
     private void acaoexcluir() {
         Funcionario funcionario = montafun();
+        if (funcionario == null) {
+            Toast.makeText(this, "Preencha corretamente os campos antes de excluir.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         try {
             fc.excluir(funcionario);
             Toast.makeText(this, getString(R.string.fundelete), Toast.LENGTH_LONG).show();
@@ -181,7 +199,9 @@ public class CFuncActivity extends AppCompatActivity {
     }
 
     private void acaobuscarr() {
-        Funcionario funcionario = montafun();
+        Funcionario funcionario = new Funcionario();
+        funcionario.setid(Integer.parseInt(id.getText().toString()));
+
         try {
             funcionario = fc.buscar(funcionario);
             if (funcionario.getNome() != null) {

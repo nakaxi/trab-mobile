@@ -56,10 +56,7 @@ public class FuncDao implements IFuncDao, ICRUDDao<Funcionario> {
         String sql = "SELECT id, nome, salario, telefone, cargo FROM funcionario WHERE id = " + funcionario.getid();
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-        if (cursor.isAfterLast()) {
+        if (!cursor.isAfterLast()) {
             funcionario.setid(cursor.getInt(cursor.getColumnIndex("id")));
             funcionario.setNome(cursor.getString(cursor.getColumnIndex("nome")));
             funcionario.setSalario(cursor.getDouble(cursor.getColumnIndex("salario")));
@@ -76,7 +73,7 @@ public class FuncDao implements IFuncDao, ICRUDDao<Funcionario> {
         String sql = "SELECT id, nome, salario, telefone, cargo FROM funcionario";
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
-        if (cursor.isAfterLast()) {
+        while (!cursor.isAfterLast()) {
             Funcionario funcionario = new Funcionario();
             funcionario.setid(cursor.getInt(cursor.getColumnIndex("id")));
             funcionario.setNome(cursor.getString(cursor.getColumnIndex("nome")));
@@ -102,4 +99,14 @@ public class FuncDao implements IFuncDao, ICRUDDao<Funcionario> {
 
         return cv;
     }
+
+    public boolean existeId(int id) {
+        String sql = "SELECT id FROM funcionario WHERE id = ?";
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(id)});
+
+        boolean existe = cursor.moveToFirst();
+        cursor.close();
+        return existe;
+    }
+
 }
